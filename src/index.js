@@ -146,8 +146,6 @@ let windSpeed = document.querySelector("#wind-speed");
 let humidity = document.querySelector("#humidity");
 let currentIcon = document.querySelector("#icon");
 let currentDescr = document.querySelector(".desc-of-weather");
-let lat = "latitude";
-let lon = "longitude";
 
 // runs changeCity when the button is clicked
 let chosenCity = document.querySelector("#change-city");

@@ -107,7 +107,7 @@ function changeTempEtc(response) {
 }
 function getTempData() {
   axios
-    .get(`${oneCallUrl}?lat=48.8&lon=2.32&appid=${apiKey}&units=${units}`)
+    .get(`${oneCallUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`)
     .then(changeTempEtc);
 }
 
@@ -146,6 +146,8 @@ let windSpeed = document.querySelector("#wind-speed");
 let humidity = document.querySelector("#humidity");
 let currentIcon = document.querySelector("#icon");
 let currentDescr = document.querySelector(".desc-of-weather");
+let lat = "latitude";
+let lon = "longitude";
 
 // runs changeCity when the button is clicked
 let chosenCity = document.querySelector("#change-city");

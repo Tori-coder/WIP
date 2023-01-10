@@ -7,6 +7,7 @@ let day3 = days[(now.getDay() + 3) % 7];
 let day4 = days[(now.getDay() + 4) % 7];
 let day5 = days[(now.getDay() + 5) % 7];
 let day6 = days[(now.getDay() + 6) % 7];
+console.log(now);
 
 //the index no of today's date= now.getDay()
 //the index no of a day in the array=findIndex(
@@ -27,15 +28,45 @@ let thingG = `<div class="grid6">${day6}</div></br><div class="gridResponse">res
 
 thingIAmDisplaying.innerHTML = `${thingA}${thingB}${thingC}${thingD}${thingE}${thingF}${thingG}`;
 
-const apiKey = "8f909eb8beff1d1a0ae8b2df17dab17d";
-const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${apiKey}`;
+let geoUrl = "http://api.openweathermap.org/geo/1.0/direct";
+let oneCallUrl =
+  "https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}";
+let apiAirQualUrl = "https://api.openweathermap.org/data/2.5/air_pollution";
+let apiKey = "8f909eb8beff1d1a0ae8b2df17dab17d";
+let units = "metric";
+lat = 28;
+lon = 77;
 
-let weatherData;
+let geoData;
+let oneCallData;
+let AirQualData;
 
-async function getWeatherData() {
-  const response = await fetch(apiUrl);
-  weatherData = await response.json();
-  console.log(weatherData);
+/*async function getGeoData() {
+  const response = await fetch(geoUrl);
+  geoData = await response.json();
+  console.log(geoData);
+}
+getGeoData();
+async function getOneCallData() {
+  const response = await fetch(oneCallUrl);
+  oneCallData = await response.json();
+  console.log(oneCallData);
+}
+getOneCallData();
+async function getAirQualData() {
+  const response = await fetch(apiAirQualUrl);
+  airQualData = await response.json();
+  console.log(airQualData);
+}
+getAirQualData();*/
+
+function showTomorrowTemp(response) {
+  //ok right now it's showing today
+  console.log(response.data.daily[0].temp);
 }
 
-getWeatherData();
+axios
+  .get(
+    `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`
+  )
+  .then(showTomorrowTemp);

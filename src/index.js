@@ -8,27 +8,15 @@ let day3 = days[(now.getDay() + 3) % 7];
 let day4 = days[(now.getDay() + 4) % 7];
 let day5 = days[(now.getDay() + 5) % 7];
 let day6 = days[(now.getDay() + 6) % 7];
-console.log(now);
 
 //the index no of today's date= now.getDay()
 //the index no of a day in the array=findIndex(
 
 let thingIAmDisplaying = document.querySelector(".weekly-forecast-grid");
 
-days.forEach(function (day) {
+/*days.forEach(function (day) {
   alert(day);
-});
-
-function createThings(){
-let thingA = `<div class="grid0">${day0}</div></br><div class="gridResponse">response.data.daily[0].temp</div>`;
-let thingB = `<div class="grid1">${day1}</div></br><div class="gridResponse">response.data.daily[1].temp</div>`;
-let thingC = `<div class="grid2">${day2}</div></br><div class="gridResponse">response.data.daily[2].temp</div>`;
-let thingD = `<div class="grid3">${day3}</div></br><div class="gridResponse">response.data.daily[3].temp</div>`;
-let thingE = `<div class="grid4">${day4}</div></br><div class="gridResponse">response.data.daily[4].temp</div>`;
-let thingF = `<div class="grid5">${day5}</div></br><div class="gridResponse">response.data.daily[5].temp</div>`;
-let thingG = `<div class="grid6">${day6}</div></br><div class="gridResponse">response.data.daily[6].temp</div>`;
-}
-thingIAmDisplaying.innerHTML = `${thingA}${thingB}${thingC}${thingD}${thingE}${thingF}${thingG}`;
+});*/
 
 let geoUrl = "http://api.openweathermap.org/geo/1.0/direct";
 let oneCallUrl =
@@ -39,11 +27,11 @@ let units = "metric";
 lat = 28;
 lon = 77;
 
-let geoData;
+/*let geoData;
 let oneCallData;
 let AirQualData;
 
-/*async function getGeoData() {
+async function getGeoData() {
   const response = await fetch(geoUrl);
   geoData = await response.json();
   console.log(geoData);
@@ -62,9 +50,16 @@ async function getAirQualData() {
 }
 getAirQualData();*/
 
-function showTomorrowTemp(response) {
-  //ok right now it's showing today
-  console.log(response.data.daily[0].temp);
+function createThings(response) {
+  let dailyData = response.data.daily;
+  let html = "";
+  for (let i = 0; i < dailyData.length - 1; i++) {
+    let temp = dailyData[i].temp.day;
+    html += `<div class="grid${i}">${eval(
+      "day" + i
+    )}</div></br><div class="gridResponse">${temp}</div>`;
+  }
+  thingIAmDisplaying.innerHTML = html;
 }
 
 axios

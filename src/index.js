@@ -1,6 +1,7 @@
 let now = new Date();
 let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-let today = days[now.getDay()];
+
+let day0 = days[now.getDay()];
 let day1 = days[(now.getDay() + 1) % 7];
 let day2 = days[(now.getDay() + 2) % 7];
 let day3 = days[(now.getDay() + 3) % 7];
@@ -18,14 +19,15 @@ days.forEach(function (day) {
   alert(day);
 });
 
-let thingA = `<div class="grid0">${today}</div></br><div class="gridResponse">response from API daily[0]</div>`;
-let thingB = `<div class="grid1">${day1}</div></br><div class="gridResponse">response from API daily[1]</div>`;
-let thingC = `<div class="grid2">${day2}</div></br><div class="gridResponse">response from API daily[2]</div>`;
-let thingD = `<div class="grid3">${day3}</div></br><div class="gridResponse">response from API daily[3]</div>`;
-let thingE = `<div class="grid4">${day4}</div></br><div class="gridResponse">response from API daily[4]</div>`;
-let thingF = `<div class="grid5">${day5}</div></br><div class="gridResponse">response from API daily[5]</div>`;
-let thingG = `<div class="grid6">${day6}</div></br><div class="gridResponse">response from API daily[6]</div>`;
-
+function createThings(){
+let thingA = `<div class="grid0">${day0}</div></br><div class="gridResponse">response.data.daily[0].temp</div>`;
+let thingB = `<div class="grid1">${day1}</div></br><div class="gridResponse">response.data.daily[1].temp</div>`;
+let thingC = `<div class="grid2">${day2}</div></br><div class="gridResponse">response.data.daily[2].temp</div>`;
+let thingD = `<div class="grid3">${day3}</div></br><div class="gridResponse">response.data.daily[3].temp</div>`;
+let thingE = `<div class="grid4">${day4}</div></br><div class="gridResponse">response.data.daily[4].temp</div>`;
+let thingF = `<div class="grid5">${day5}</div></br><div class="gridResponse">response.data.daily[5].temp</div>`;
+let thingG = `<div class="grid6">${day6}</div></br><div class="gridResponse">response.data.daily[6].temp</div>`;
+}
 thingIAmDisplaying.innerHTML = `${thingA}${thingB}${thingC}${thingD}${thingE}${thingF}${thingG}`;
 
 let geoUrl = "http://api.openweathermap.org/geo/1.0/direct";
@@ -69,4 +71,4 @@ axios
   .get(
     `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`
   )
-  .then(showTomorrowTemp);
+  .then(createThings);

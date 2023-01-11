@@ -19,8 +19,7 @@ let thingIAmDisplaying = document.querySelector(".weekly-forecast-grid");
 });*/
 
 let geoUrl = "http://api.openweathermap.org/geo/1.0/direct";
-let oneCallUrl =
-  "https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}";
+let oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall";
 let apiAirQualUrl = "https://api.openweathermap.org/data/2.5/air_pollution";
 let apiKey = "8f909eb8beff1d1a0ae8b2df17dab17d";
 let units = "metric";
@@ -52,18 +51,24 @@ getAirQualData();*/
 
 function createThings(response) {
   let dailyData = response.data.daily;
-  let html = "";
-  for (let i = 0; i < dailyData.length - 1; i++) {
-    let temp = dailyData[i].temp.day;
-    html += `<div class="grid${i}">${eval(
-      "day" + i
-    )}</div></br><div class="gridResponse">${temp}</div>`;
-  }
-  thingIAmDisplaying.innerHTML = html;
-}
+  let forecastHTML = "";
 
+  for (let i = 0; i < 7; i++) {
+    let forecastIcon = `<img class="forecast-icon" img src="https://openweathermap.org/img/wn/${response.data.daily[i].weather.icon}@2x.png"/>`;
+    let temp = dailyData[i].temp.day;
+    forecastHTML += `<div class="grid${i}">${eval(
+      "day" + i
+    )}</div></br><div class="gridResponse">${temp}</div></br><div>${forecastIcon}</div>`;
+  }
+  thingIAmDisplaying.innerHTML = forecastHTML;
+}
 axios
   .get(
-    `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`
+    `${oneCallUrl}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`
   )
   .then(createThings);
+
+/*forecastIcon.setAttribute(
+      "alt",
+      `${response.data.daily[i].weather.description}`
+    );*/

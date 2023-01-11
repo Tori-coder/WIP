@@ -73,3 +73,7 @@ p {
 .gridResponse {
   grid-row: 2;
 }
+.forecast-icon {
+  width: 20px;
+  grid-row: 3;
+}

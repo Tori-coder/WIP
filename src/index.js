@@ -25,11 +25,11 @@ function createForecastGrid(response) {
   let forecastHTML = "";
   let forecastGrid = document.querySelector(".weekly-forecast-grid");
   for (let i = 0; i < 7; i++) {
-    let forecastIcon2 = dailyData[i].weather.icon;
+    let forecastIcon = dailyData[i].weather.icon;
     let temp = dailyData[i].temp.day;
     forecastHTML += `<div class="grid${i}">${eval(
       "day" + i
-    )}</div></br><div class="gridResponse">${temp}</div></br><img class="forecast-icon" src="https://openweathermap.org/img/wn/${forecastIcon2}@2x.png" alt="forecast icon"/>`;
+    )}</div></br><div class="gridResponse">${temp}</div></br><img class="forecast-icon" src="https://openweathermap.org/img/wn/${forecastIcon}@2x.png" alt="forecast icon"/>`;
   }
   forecastGrid.innerHTML = forecastHTML;
 }

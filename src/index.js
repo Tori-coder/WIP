@@ -20,12 +20,11 @@ lat = 28;
 lon = 77;
 
 function createForecastGrid(response) {
-  console.log(response.data.daily[0].weather.description);
   let dailyData = response.data.daily;
   let forecastHTML = "";
   let forecastGrid = document.querySelector(".weekly-forecast-grid");
   for (let i = 0; i < 7; i++) {
-    let forecastIcon = dailyData[i].weather.icon;
+    let forecastIcon = dailyData[i].weather[0].icon;
     let temp = dailyData[i].temp.day;
     forecastHTML += `<div class="grid${i}">${eval(
       "day" + i
